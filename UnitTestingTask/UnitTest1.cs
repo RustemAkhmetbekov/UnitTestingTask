@@ -1,3 +1,5 @@
+using System.Security.Principal;
+
 namespace UnitTestingTask
 {
     public class Tests
@@ -8,6 +10,28 @@ namespace UnitTestingTask
         public void Setup()
         {
             line = new ConsecutiveIdentical();
+        }
+
+        [Test]
+        public void MaxUnequalConsecutiveChars_ReturnsCorrectValue()
+        {
+            // Arrange
+            string input1 = "AAABBBCCCCDDDDE";
+            string input2 = "ABBBCCDD";
+            string input3 = "A";
+            string input4 = "";
+
+            // Act
+            int result1 = line.MaximumUnequalConsecutiveChars(input1);
+            int result2 = line.MaximumUnequalConsecutiveChars(input2);
+            int result3 = line.MaximumUnequalConsecutiveChars(input3);
+            int result4 = line.MaximumUnequalConsecutiveChars(input4);
+
+            // Assert
+            Assert.That(result1, Is.EqualTo(5));
+            Assert.That(result2, Is.EqualTo(4));
+            Assert.That(result3, Is.EqualTo(1));
+            Assert.That(result4, Is.EqualTo(0));
         }
 
         [Test]
@@ -26,10 +50,10 @@ namespace UnitTestingTask
             int result4 = line.MaximumConsecutiveIdenticalLetters(input4);
 
             // Assert
-            Assert.That(result1, Is.EqualTo(3)); // AAA, BBB, CCC
-            Assert.That(result2, Is.EqualTo(2)); // AA, BB
-            Assert.That(result3, Is.EqualTo(1)); // Single letter
-            Assert.That(result4, Is.EqualTo(0)); // Empty string
+            Assert.That(result1, Is.EqualTo(3));
+            Assert.That(result2, Is.EqualTo(2));
+            Assert.That(result3, Is.EqualTo(1));
+            Assert.That(result4, Is.EqualTo(0));
         }
 
         [Test]
@@ -48,10 +72,10 @@ namespace UnitTestingTask
             int result4 = line.MaximumConsecutiveIdenticalDigits(input4);
 
             // Assert
-            Assert.That(result1, Is.EqualTo(3)); // 444, 555
-            Assert.That(result2, Is.EqualTo(2)); // 11, 22
-            Assert.That(result3, Is.EqualTo(1)); // Single digit
-            Assert.That(result4, Is.EqualTo(0)); // Empty string
+            Assert.That(result1, Is.EqualTo(3));
+            Assert.That(result2, Is.EqualTo(2));
+            Assert.That(result3, Is.EqualTo(1));
+            Assert.That(result4, Is.EqualTo(0));
         }
     }
 }
